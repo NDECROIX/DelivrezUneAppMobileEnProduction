@@ -6,6 +6,9 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>Models for project in which tasks are included.</p>
  *
@@ -42,6 +45,22 @@ public class Project {
         this.id = id;
         this.name = name;
         this.color = color;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof Project)) return false;
+        Project projectCompared = (Project) obj;
+        if (projectCompared == this) return true;
+
+        return this.id == projectCompared.getId() &&
+                this.name.equals(projectCompared.getName()) &&
+                this.color == projectCompared.getColor();
     }
 
     /**
@@ -108,6 +127,5 @@ public class Project {
     public String toString() {
         return getName();
     }
-
 
 }
