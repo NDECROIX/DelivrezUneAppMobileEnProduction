@@ -8,6 +8,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 
 import com.cleanup.todoc.database.dao.ProjectDAO;
 import com.cleanup.todoc.database.dao.TaskDAO;
@@ -22,12 +23,13 @@ public abstract class TodocMasterDatabase extends RoomDatabase {
 
     // --- DAO ---
     public abstract ProjectDAO projectDAO();
+
     public abstract TaskDAO taskDAO();
 
     // --- INSTANCE ---
-    public static TodocMasterDatabase getINSTANCE(Context context){
-        if (INSTANCE == null){
-            synchronized (TodocMasterDatabase.class){
+    public static TodocMasterDatabase getINSTANCE(Context context) {
+        if (INSTANCE == null) {
+            synchronized (TodocMasterDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TodocMasterDatabase.class, "MyDatabase.db")
@@ -39,26 +41,26 @@ public abstract class TodocMasterDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static Callback preAddProjectsToDatabase() {
+    // Insert projects in the database
+    @VisibleForTesting
+    public static Callback preAddProjectsToDatabase() {
         return new Callback() {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate(db);
-                db.insert("Project", OnConflictStrategy.IGNORE,
-                        createProject(1L, "Projet Tartampion", 0xFFEADAD1));
-                db.insert("Project", OnConflictStrategy.IGNORE,
-                        createProject(2L, "Projet Lucidia", 0xFFB4CDBA));
-                db.insert("Project", OnConflictStrategy.IGNORE,
-                        createProject(3L, "Projet Circus", 0xFFA3CED2));
+                for (Project project : Project.getAllProjects()) {
+                    db.insert("Project", OnConflictStrategy.IGNORE,
+                            createProject(project));
+                }
             }
         };
     }
 
-    private static ContentValues createProject(long id, String name, int color){
+    private static ContentValues createProject(Project project) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id", id);
-        contentValues.put("name", name);
-        contentValues.put("color", color);
+        contentValues.put("id", project.getId());
+        contentValues.put("name", project.getName());
+        contentValues.put("color", project.getColor());
         return contentValues;
     }
 }

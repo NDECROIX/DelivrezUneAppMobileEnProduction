@@ -6,8 +6,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>Models for project in which tasks are included.</p>
@@ -47,22 +46,6 @@ public class Project {
         this.color = color;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(@Nullable Object obj) {
-        if (!(obj instanceof Project)) return false;
-        Project projectCompared = (Project) obj;
-        if (projectCompared == this) return true;
-
-        return this.id == projectCompared.getId() &&
-                this.name.equals(projectCompared.getName()) &&
-                this.color == projectCompared.getColor();
-    }
-
     /**
      * Returns all the projects of the application.
      *
@@ -71,7 +54,7 @@ public class Project {
     @NonNull
     public static Project[] getAllProjects() {
         return new Project[]{
-                    new Project(1L, "Projet Tartampion", 0xFFEADAD1),
+                new Project(1L, "Projet Tartampion", 0xFFEADAD1),
                 new Project(2L, "Projet Lucidia", 0xFFB4CDBA),
                 new Project(3L, "Projet Circus", 0xFFA3CED2),
         };
@@ -85,7 +68,7 @@ public class Project {
      * @return the project with the given unique identifier, or null if it has not been found
      */
     @Nullable
-    public static Project getProjectById(long id) {
+    static Project getProjectById(long id) {
         for (Project project : getAllProjects()) {
             if (project.id == id)
                 return project;
@@ -128,4 +111,18 @@ public class Project {
         return getName();
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, color);
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof Project)) return false;
+        Project projectCompared = (Project) obj;
+        return this.id == projectCompared.getId() &&
+                this.name.equals(projectCompared.getName()) &&
+                this.color == projectCompared.getColor();
+    }
 }

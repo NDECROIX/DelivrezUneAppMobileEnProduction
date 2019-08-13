@@ -2,7 +2,6 @@ package com.cleanup.todoc.ui;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.support.annotation.Nullable;
 
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
@@ -20,7 +19,6 @@ public class TaskViewModel extends ViewModel {
     private final Executor executor;
 
     // --- DATA ---
-
     public TaskViewModel(ProjectDataRepository projectDataSource, TaskDataRepository taskDataSource, Executor executor) {
         this.projectDataSource = projectDataSource;
         this.taskDataSource = taskDataSource;
@@ -31,35 +29,23 @@ public class TaskViewModel extends ViewModel {
     // FOR PROJECT
     // --------------
 
-    public LiveData<List<Project>> getProjects(){
+    LiveData<List<Project>> getProjects() {
         return this.projectDataSource.getProjects();
-    }
-
-    public LiveData<Project> getProject(long projectId){
-        return this.projectDataSource.getProject(projectId);
     }
 
     // --------------
     // FOR TASK
     // --------------
 
-    public LiveData<List<Task>> getTasksByProject(long projectId){
-        return taskDataSource.getTasksByProject(projectId);
-    }
-
-    public LiveData<List<Task>> getTasks(){
+    LiveData<List<Task>> getTasks() {
         return taskDataSource.getTasks();
     }
 
-    public void insertTask(Task task){
+    void insertTask(Task task) {
         executor.execute(() -> taskDataSource.insertTask(task));
     }
 
-    public void updateTask(Task task){
-        executor.execute(() -> taskDataSource.updateTask(task));
-    }
-
-    public void deleteTask(Task task){
+    void deleteTask(Task task) {
         executor.execute(() -> taskDataSource.deleteTask(task));
     }
 }

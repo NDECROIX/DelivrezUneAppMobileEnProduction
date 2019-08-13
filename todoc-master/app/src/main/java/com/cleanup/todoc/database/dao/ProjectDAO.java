@@ -13,8 +13,4 @@ public interface ProjectDAO {
 
     @Query("SELECT * From Project")
     LiveData<List<Project>> getProjects();
-
-    @Query("SELECT * From Project WHERE id = :id")
-    LiveData<Project> getProjectById(long id);
-
 }

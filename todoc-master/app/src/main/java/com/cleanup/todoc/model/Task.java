@@ -1,6 +1,5 @@
 package com.cleanup.todoc.model;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
@@ -18,8 +17,7 @@ import java.util.Comparator;
 @Entity(foreignKeys = @ForeignKey(entity = Project.class,
         parentColumns = "id",
         childColumns = "projectId"),
-indices = @Index(value = "projectId"))
-
+        indices = @Index(value = "projectId"))
 public class Task {
     /**
      * The unique identifier of the task
@@ -47,8 +45,9 @@ public class Task {
 
     /**
      * Instantiates a new Task.
-     *
+     * <p>
      * //@param id                the unique identifier of the task to set
+     *
      * @param projectId         the unique identifier of the project associated to the task to set
      * @param name              the name of the task to set
      * @param creationTimestamp the timestamp when the task has been created to set
@@ -71,7 +70,7 @@ public class Task {
     /**
      * Sets the unique identifier of the task.
      *
-     * @param id the unique idenifier of the task to set
+     * @param id the unique identifier of the task to set
      */
     public void setId(long id) {
         this.id = id;
@@ -107,6 +106,24 @@ public class Task {
     }
 
     /**
+     * Returns the project of the task.
+     *
+     * @return the project of the task
+     */
+    public long getProjectId() {
+        return projectId;
+    }
+
+    /**
+     * Returns the TimesTamp of the task.
+     *
+     * @return the TimesTamp of the task
+     */
+    public long getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    /**
      * Sets the name of the task.
      *
      * @param name the name of the task to set
@@ -122,14 +139,6 @@ public class Task {
      */
     private void setCreationTimestamp(long creationTimestamp) {
         this.creationTimestamp = creationTimestamp;
-    }
-
-    public long getProjectId() {
-        return projectId;
-    }
-
-    public long getCreationTimestamp() {
-        return creationTimestamp;
     }
 
     /**

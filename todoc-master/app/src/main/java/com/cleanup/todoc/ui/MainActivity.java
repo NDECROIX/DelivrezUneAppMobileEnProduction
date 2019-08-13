@@ -35,7 +35,7 @@ import java.util.List;
  *
  * @author Gaëtan HERFRAY
  */
-public class    MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
+public class MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
 
     private TaskViewModel taskViewModel;
 
@@ -101,7 +101,7 @@ public class    MainActivity extends AppCompatActivity implements TasksAdapter.D
 
         setContentView(R.layout.activity_main);
         configureViewModel();
-        configList();
+        configLists();
         listTasks = findViewById(R.id.list_tasks);
         lblNoTasks = findViewById(R.id.lbl_no_task);
 
@@ -111,22 +111,36 @@ public class    MainActivity extends AppCompatActivity implements TasksAdapter.D
         findViewById(R.id.fab_add_task).setOnClickListener(view -> showAddTaskDialog());
     }
 
-    private void configList() {
+    /**
+     * Configure the lists used in the activity
+     */
+    private void configLists() {
         this.taskViewModel.getTasks().observe(this, this::updateTaskList);
         this.taskViewModel.getProjects().observe(this, this::updateProjectList);
     }
 
-    private void updateTaskList(List<Task> tasks){
+    /**
+     * Fill in the list of tasks
+     * @param tasks list
+     */
+    private void updateTaskList(List<Task> tasks) {
         if (!this.tasks.isEmpty()) this.tasks.clear();
         this.tasks.addAll(tasks);
         this.updateTasks();
     }
 
-    private void updateProjectList(List<Project> projects){
+    /**
+     * Update the list of projects
+     * @param projects list
+     */
+    private void updateProjectList(List<Project> projects) {
         allProjects.clear();
         allProjects.addAll(projects);
     }
 
+    /**
+     * Configure the view model for the use of repositories
+     */
     private void configureViewModel() {
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(this);
         this.taskViewModel = ViewModelProviders.of(this, viewModelFactory).get(TaskViewModel.class);
@@ -200,7 +214,7 @@ public class    MainActivity extends AppCompatActivity implements TasksAdapter.D
                 dialogInterface.dismiss();
             }
             // If name has been set, but project has not been set (this should never occur)
-            else{
+            else {
                 dialogInterface.dismiss();
             }
         }

@@ -15,23 +15,18 @@ public class TaskDataRepository {
         this.taskDAO = taskDAO;
     }
 
-    public LiveData<List<Task>> getTasksByProject(long projectId){
-        return this.taskDAO.getTasksByProject(projectId);
-    }
-
-    public LiveData<List<Task>> getTasks(){
+    // --- GET TASKS ---
+    public LiveData<List<Task>> getTasks() {
         return this.taskDAO.getTasks();
     }
 
-    public void insertTask(Task task){
+    // --- INSERT TASK ---
+    public void insertTask(Task task) {
         this.taskDAO.insertTask(task);
     }
 
-    public void updateTask(Task task){
-        this.taskDAO.updateTask(task);
-    }
-
-    public void deleteTask(Task task){
+    // --- DELETE TASK ---
+    public void deleteTask(Task task) {
         taskDAO.deleteTask(task);
     }
 

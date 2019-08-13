@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.cleanup.todoc.Utils.LiveDataTestUtil;
 import com.cleanup.todoc.database.TodocMasterDatabase;
 import com.cleanup.todoc.model.Project;
 
@@ -26,6 +27,7 @@ public class ProjectDAOTest {
     private TodocMasterDatabase database;
 
 
+    // Perform the test on the main thread
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
@@ -42,9 +44,12 @@ public class ProjectDAOTest {
         database.close();
     }
 
+    /**
+     * Check if the database has the right projects
+     */
     @Test
     public void getProjects_withSuccess() throws Exception {
-        List<Project> projectsDatabase = LiveDataUtil.getValue(this.database.projectDAO().getProjects());
+        List<Project> projectsDatabase = LiveDataTestUtil.getValue(this.database.projectDAO().getProjects());
         assertArrayEquals(projectsDatabase.toArray(), Project.getAllProjects());
     }
 }
