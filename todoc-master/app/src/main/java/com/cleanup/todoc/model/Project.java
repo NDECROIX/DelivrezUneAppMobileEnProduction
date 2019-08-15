@@ -40,6 +40,7 @@ public class Project {
      * @param name  the name of the project to set
      * @param color the hex (ARGB) code of the color associated to the project to set
      */
+    // Modified to public for Room
     public Project(long id, @NonNull String name, @ColorInt int color) {
         this.id = id;
         this.name = name;
@@ -68,7 +69,7 @@ public class Project {
      * @return the project with the given unique identifier, or null if it has not been found
      */
     @Nullable
-    static Project getProjectById(long id) {
+    public static Project getProjectById(long id) {
         for (Project project : getAllProjects()) {
             if (project.id == id)
                 return project;
@@ -111,6 +112,9 @@ public class Project {
         return getName();
     }
 
+    // ------------------
+    // Added for testing
+    // ------------------
     @Override
     public int hashCode() {
         return Objects.hash(id, name, color);

@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.cleanup.todoc.Utils.LiveDataTestUtil;
+import com.cleanup.todoc.utils.LiveDataTestUtil;
 import com.cleanup.todoc.database.TodocMasterDatabase;
 import com.cleanup.todoc.model.Task;
 
@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -46,13 +47,23 @@ public class TaskDAOTest {
     }
 
     /**
-     * Insert and retrieve a task in the database
+     * Insert a task in the database
      */
     @Test
     public void myTaskDAOTest_insertAndGetTask_withSuccess() throws Exception {
         this.database.taskDAO().insertTask(TASK);
         Task task = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks()).get(0);
         assertTrue(task.getName().equals(TASK.getName()) && task.getCreationTimestamp() == TASK.getCreationTimestamp());
+    }
+
+    /**
+     * Get task in the database
+     */
+    @Test
+    public void myTaskDAOTest_GetTask_withSuccess() throws Exception {
+        this.database.taskDAO().insertTask(TASK);
+        List<Task> task = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks());
+        assertTrue(!task.isEmpty());
     }
 
     /**

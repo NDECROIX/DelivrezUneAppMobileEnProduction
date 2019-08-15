@@ -52,6 +52,8 @@ public class Task {
      * @param name              the name of the task to set
      * @param creationTimestamp the timestamp when the task has been created to set
      */
+    //Modified by the identifier deleted because we have autoGenerate at true above.
+    //     Task(long id, long projectId, @NonNull String name, long creationTimestamp)
     public Task(long projectId, @NonNull String name, long creationTimestamp) {
         this.setProjectId(projectId);
         this.setName(name);
@@ -72,6 +74,7 @@ public class Task {
      *
      * @param id the unique identifier of the task to set
      */
+    // Modified to public for Room
     public void setId(long id) {
         this.id = id;
     }
@@ -110,6 +113,7 @@ public class Task {
      *
      * @return the project of the task
      */
+    // Added for Room
     public long getProjectId() {
         return projectId;
     }
@@ -119,6 +123,7 @@ public class Task {
      *
      * @return the TimesTamp of the task
      */
+    //Added for Room
     public long getCreationTimestamp() {
         return creationTimestamp;
     }

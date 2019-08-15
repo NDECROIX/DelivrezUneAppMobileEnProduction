@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.cleanup.todoc.Utils.LiveDataTestUtil;
+import com.cleanup.todoc.utils.LiveDataTestUtil;
 import com.cleanup.todoc.database.TodocMasterDatabase;
 import com.cleanup.todoc.model.Project;
 
