@@ -1,4 +1,4 @@
-package com.cleanup.todoc;
+package com.cleanup.todoc.utils;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
@@ -41,7 +41,6 @@ public class RecyclerViewMatcher {
                                         (recyclerViewId));
                     }
                 }
-
                 description.appendText("with id: " + idDescription);
             }
 
@@ -65,7 +64,6 @@ public class RecyclerViewMatcher {
                     View targetView = childView.findViewById(targetViewId);
                     return view == targetView;
                 }
-
             }
         };
     }
