@@ -37,12 +37,12 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
 
-    private TaskViewModel taskViewModel; // Added for data persistence
+    private TaskViewModel taskViewModel;
 
     /**
      * List of all projects available in the application
      */
-    private final List<Project> allProjects = new ArrayList<>(); // Modified to receive projects from the database
+    private final List<Project> allProjects = new ArrayList<>();
 
     /**
      * List of all current tasks of the application
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
         setContentView(R.layout.activity_main);
 
-        configureViewModel(); // Added for data persistence
-        configLists(); // Added for data persistence
+        configureViewModel();
+        configLists();
 
         listTasks = findViewById(R.id.list_tasks);
         lblNoTasks = findViewById(R.id.lbl_no_task);
@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     /**
      * Configure the lists used in the activity
      */
-    // Added for data persistence
     private void configLists() {
         this.taskViewModel.getTasks().observe(this, this::updateTaskList);
         this.taskViewModel.getProjects().observe(this, this::updateProjectList);
@@ -126,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * Fill in the list of tasks
      * @param tasks list
      */
-    // Added for data persistence
     private void updateTaskList(List<Task> tasks) {
         if (!this.tasks.isEmpty()) this.tasks.clear();
         this.tasks.addAll(tasks);
@@ -137,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * Update the list of projects
      * @param projects list
      */
-    // Added for data persistence
     private void updateProjectList(List<Project> projects) {
         allProjects.clear();
         allProjects.addAll(projects);
@@ -146,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     /**
      * Configure the view model for the use of repositories
      */
-    // Added for data persistence
     private void configureViewModel() {
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(this);
         this.taskViewModel = ViewModelProviders.of(this, viewModelFactory).get(TaskViewModel.class);
@@ -177,7 +173,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         return super.onOptionsItemSelected(item);
     }
 
-    // Modified for data persistence
     @Override
     public void onDeleteTask(Task task) {
         this.taskViewModel.deleteTask(task);
@@ -206,9 +201,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             }
             // If both project and name of the task have been set
             else if (taskProject != null) {
-                // TODO: Replace this by id of persisted task
-                //long id = (long) (Math.random() * 50000);
-                //deleted and replaced in the model by autoGenerate
                 Task task = new Task(
                         taskProject.getId(),
                         taskName,
@@ -249,7 +241,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      *
      * @param task the task to be added to the list
      */
-    // Modified for data persistence
     private void addTask(@NonNull Task task) {
         taskViewModel.insertTask(task);
     }
@@ -266,10 +257,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             listTasks.setVisibility(View.VISIBLE);
             switch (sortMethod) {
                 case ALPHABETICAL:
-                    Collections.sort(tasks, new Task.TaskAZComparator());
+                    Collections.sort(tasks, new Task.TaskProjectNameAZComparator());
                     break;
                 case ALPHABETICAL_INVERTED:
-                    Collections.sort(tasks, new Task.TaskZAComparator());
+                    Collections.sort(tasks, new Task.TaskProjectNameZAComparator());
                     break;
                 case RECENT_FIRST:
                     Collections.sort(tasks, new Task.TaskRecentComparator());

@@ -52,8 +52,6 @@ public class Task {
      * @param name              the name of the task to set
      * @param creationTimestamp the timestamp when the task has been created to set
      */
-    //Modified by the identifier deleted because we have autoGenerate at true above.
-    //     Task(long id, long projectId, @NonNull String name, long creationTimestamp)
     public Task(long projectId, @NonNull String name, long creationTimestamp) {
         this.setProjectId(projectId);
         this.setName(name);
@@ -74,7 +72,6 @@ public class Task {
      *
      * @param id the unique identifier of the task to set
      */
-    // Modified to public for Room
     public void setId(long id) {
         this.id = id;
     }
@@ -113,7 +110,6 @@ public class Task {
      *
      * @return the project of the task
      */
-    // Added for Room
     public long getProjectId() {
         return projectId;
     }
@@ -123,7 +119,6 @@ public class Task {
      *
      * @return the TimesTamp of the task
      */
-    //Added for Room
     public long getCreationTimestamp() {
         return creationTimestamp;
     }
@@ -147,22 +142,24 @@ public class Task {
     }
 
     /**
-     * Comparator to sort task from A to Z
+     * Comparator to sort by project name of the task from A to Z
      */
-    public static class TaskAZComparator implements Comparator<Task> {
+    public static class TaskProjectNameAZComparator implements Comparator<Task> {
         @Override
         public int compare(Task left, Task right) {
-            return left.name.compareTo(right.name);
+            return Project.getProjectById(left.projectId).getName()
+                    .compareTo(Project.getProjectById(right.projectId).getName());
         }
     }
 
     /**
-     * Comparator to sort task from Z to A
+     * Comparator to sort by project name of the task from Z yo A
      */
-    public static class TaskZAComparator implements Comparator<Task> {
+    public static class TaskProjectNameZAComparator implements Comparator<Task> {
         @Override
         public int compare(Task left, Task right) {
-            return right.name.compareTo(left.name);
+            return Project.getProjectById(right.projectId).getName()
+                    .compareTo(Project.getProjectById(left.projectId).getName());
         }
     }
 

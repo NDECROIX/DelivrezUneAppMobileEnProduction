@@ -50,14 +50,14 @@ public class TaskDAOTest {
      * Insert a task in the database
      */
     @Test
-    public void myTaskDAOTest_insertAndGetTask_withSuccess() throws Exception {
+    public void myTaskDAOTest_insertTask_withSuccess() throws Exception {
         this.database.taskDAO().insertTask(TASK);
         Task task = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks()).get(0);
         assertTrue(task.getName().equals(TASK.getName()) && task.getCreationTimestamp() == TASK.getCreationTimestamp());
     }
 
     /**
-     * Get task in the database
+     * Get tasks in the database
      */
     @Test
     public void myTaskDAOTest_GetTask_withSuccess() throws Exception {
@@ -70,7 +70,7 @@ public class TaskDAOTest {
      * Insert and delete a task in the database
      */
     @Test
-    public void myTaskDAOTest_insertAndDeleteTask_withSuccess() throws Exception {
+    public void myTaskDAOTest_DeleteTask_withSuccess() throws Exception {
         this.database.taskDAO().insertTask(TASK);
         Task task = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks()).get(0);
         database.taskDAO().deleteTask(task);

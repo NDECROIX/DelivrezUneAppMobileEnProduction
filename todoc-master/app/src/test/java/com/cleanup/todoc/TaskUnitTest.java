@@ -19,6 +19,9 @@ import static org.junit.Assert.assertSame;
  */
 public class TaskUnitTest {
 
+    /**
+     * Get the project from the task successfully
+     */
     @Test
     public void test_projects() {
         final Task task1 = new Task(1, "task 1", new Date().getTime());
@@ -32,6 +35,9 @@ public class TaskUnitTest {
         assertNull(task4.getProject());
     }
 
+    /**
+     * Sort tasks by project name A Z
+     */
     @Test
     public void test_az_comparator() {
         final Task task1 = new Task(1, "aaa", 123);
@@ -42,13 +48,16 @@ public class TaskUnitTest {
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
-        Collections.sort(tasks, new Task.TaskAZComparator());
+        Collections.sort(tasks, new Task.TaskProjectNameAZComparator());
 
-        assertSame(tasks.get(0), task1);
-        assertSame(tasks.get(1), task3);
-        assertSame(tasks.get(2), task2);
+        assertSame(tasks.get(0), task3);
+        assertSame(tasks.get(1), task2);
+        assertSame(tasks.get(2), task1);
     }
 
+    /**
+     * Sort tasks by project name Z A
+     */
     @Test
     public void test_za_comparator() {
         final Task task1 = new Task(1, "aaa", 123);
@@ -59,13 +68,16 @@ public class TaskUnitTest {
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
-        Collections.sort(tasks, new Task.TaskZAComparator());
+        Collections.sort(tasks, new Task.TaskProjectNameZAComparator());
 
-        assertSame(tasks.get(0), task2);
-        assertSame(tasks.get(1), task3);
-        assertSame(tasks.get(2), task1);
+        assertSame(tasks.get(0), task1);
+        assertSame(tasks.get(1), task2);
+        assertSame(tasks.get(2), task3);
     }
 
+    /**
+     * Sort tasks by most recent
+     */
     @Test
     public void test_recent_comparator() {
         final Task task1 = new Task(1, "aaa", 123);
@@ -83,6 +95,9 @@ public class TaskUnitTest {
         assertSame(tasks.get(2), task1);
     }
 
+    /**
+     * Sort tasks by oldest
+     */
     @Test
     public void test_old_comparator() {
         final Task task1 = new Task(1, "aaa", 123);

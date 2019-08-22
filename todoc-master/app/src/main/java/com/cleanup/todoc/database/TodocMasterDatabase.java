@@ -41,7 +41,6 @@ public abstract class TodocMasterDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    // Insert projects in the database
     @VisibleForTesting
     public static Callback preAddProjectsToDatabase() {
         return new Callback() {

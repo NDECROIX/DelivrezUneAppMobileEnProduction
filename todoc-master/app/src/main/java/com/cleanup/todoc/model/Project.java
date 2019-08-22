@@ -40,7 +40,6 @@ public class Project {
      * @param name  the name of the project to set
      * @param color the hex (ARGB) code of the color associated to the project to set
      */
-    // Modified to public for Room
     public Project(long id, @NonNull String name, @ColorInt int color) {
         this.id = id;
         this.name = name;
