@@ -10,9 +10,19 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+    signingConfigs {
         release {
-            minifyEnabled false
+            storeFile file("../upload-keystore.jks")
+            storePassword "1576011764"
+            keyAlias "key0"
+            keyPassword "1576011764"
+            v2SigningEnabled false
+        }
+    }
+        buildTypes {
+        release {
+            minifyEnabled true
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
