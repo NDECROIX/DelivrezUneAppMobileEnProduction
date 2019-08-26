@@ -1,13 +1,13 @@
-package com.cleanup.todoc;
+package com.cleanup.todocmaster;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.arch.persistence.room.Room;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.cleanup.todoc.utils.LiveDataTestUtil;
-import com.cleanup.todoc.database.TodocMasterDatabase;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocmaster.utils.LiveDataTestUtil;
+import com.cleanup.todocmaster.database.TodocMasterDatabase;
+import com.cleanup.todocmaster.model.Task;
 
 import org.junit.After;
 import org.junit.Before;
@@ -50,7 +50,7 @@ public class TaskDAOTest {
      * Insert a task in the database
      */
     @Test
-    public void myTaskDAOTest_insertTask_withSuccess() throws Exception {
+    public void insertTask_withSuccess() throws Exception {
         this.database.taskDAO().insertTask(TASK);
         Task task = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks()).get(0);
         assertTrue(task.getName().equals(TASK.getName()) && task.getCreationTimestamp() == TASK.getCreationTimestamp());
@@ -60,17 +60,17 @@ public class TaskDAOTest {
      * Get tasks in the database
      */
     @Test
-    public void myTaskDAOTest_GetTask_withSuccess() throws Exception {
+    public void getTask_withSuccess() throws Exception {
         this.database.taskDAO().insertTask(TASK);
         List<Task> task = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks());
         assertTrue(!task.isEmpty());
     }
 
     /**
-     * Insert and delete a task in the database
+     * Delete a task in the database
      */
     @Test
-    public void myTaskDAOTest_DeleteTask_withSuccess() throws Exception {
+    public void deleteTask_withSuccess() throws Exception {
         this.database.taskDAO().insertTask(TASK);
         Task task = LiveDataTestUtil.getValue(this.database.taskDAO().getTasks()).get(0);
         database.taskDAO().deleteTask(task);

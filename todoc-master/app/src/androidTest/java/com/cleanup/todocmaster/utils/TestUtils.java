@@ -1,4 +1,4 @@
-package com.cleanup.todoc.utils;
+package com.cleanup.todocmaster.utils;
 
 import android.support.annotation.IdRes;
 import android.support.test.espresso.PerformException;

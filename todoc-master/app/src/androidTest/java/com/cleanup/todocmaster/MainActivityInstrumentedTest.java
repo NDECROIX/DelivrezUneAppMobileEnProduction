@@ -1,4 +1,4 @@
-package com.cleanup.todoc;
+package com.cleanup.todocmaster;
 
 import android.content.Context;
 import android.support.test.espresso.matcher.RootMatchers;
@@ -8,10 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.cleanup.todoc.database.TodocMasterDatabase;
-import com.cleanup.todoc.database.dao.TaskDAO;
-import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.ui.MainActivity;
+import com.cleanup.todocmaster.database.TodocMasterDatabase;
+import com.cleanup.todocmaster.database.dao.TaskDAO;
+import com.cleanup.todocmaster.model.Task;
+import com.cleanup.todocmaster.ui.MainActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,7 +29,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.cleanup.todoc.utils.TestUtils.withRecyclerView;
+import static com.cleanup.todocmaster.utils.TestUtils.withRecyclerView;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -79,8 +79,8 @@ public class MainActivityInstrumentedTest {
     @Test
     public void checkTasksInRecyclerView(){
         addTasksInRecyclerView();
-        RecyclerView listTasks = activity.findViewById(R.id.list_tasks);
         onIdle();
+        RecyclerView listTasks = activity.findViewById(R.id.list_tasks);
         assertThat(listTasks.getAdapter().getItemCount(), equalTo(3));
     }
 
