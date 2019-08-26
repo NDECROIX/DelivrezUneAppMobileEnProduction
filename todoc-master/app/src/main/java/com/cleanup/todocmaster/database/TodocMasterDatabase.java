@@ -1,4 +1,4 @@
-package com.cleanup.todoc.database;
+package com.cleanup.todocmaster.database;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -10,10 +10,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
-import com.cleanup.todoc.database.dao.ProjectDAO;
-import com.cleanup.todoc.database.dao.TaskDAO;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocmaster.database.dao.ProjectDAO;
+import com.cleanup.todocmaster.database.dao.TaskDAO;
+import com.cleanup.todocmaster.model.Project;
+import com.cleanup.todocmaster.model.Task;
 
 @Database(entities = {Project.class, Task.class}, version = 1, exportSchema = false)
 public abstract class TodocMasterDatabase extends RoomDatabase {

@@ -1,4 +1,4 @@
-package com.cleanup.todoc.ui;
+package com.cleanup.todocmaster.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
@@ -18,11 +18,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.cleanup.todoc.R;
-import com.cleanup.todoc.injections.Injection;
-import com.cleanup.todoc.injections.ViewModelFactory;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocmaster.R;
+import com.cleanup.todocmaster.injections.Injection;
+import com.cleanup.todocmaster.injections.ViewModelFactory;
+import com.cleanup.todocmaster.model.Project;
+import com.cleanup.todocmaster.model.Task;
 
 import java.util.ArrayList;
 import java.util.Collections;

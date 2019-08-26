@@ -1,4 +1,4 @@
-package com.cleanup.todoc.ui;
+package com.cleanup.todocmaster.ui;
 
 import android.content.res.ColorStateList;
 import android.support.annotation.NonNull;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cleanup.todoc.R;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocmaster.R;
+import com.cleanup.todocmaster.model.Project;
+import com.cleanup.todocmaster.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;

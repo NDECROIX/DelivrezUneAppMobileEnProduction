@@ -1,4 +1,4 @@
-package com.cleanup.todoc.model;
+package com.cleanup.todocmaster.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
